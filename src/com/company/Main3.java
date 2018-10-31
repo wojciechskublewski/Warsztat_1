@@ -37,6 +37,7 @@ public class Main3 {
 
                 if (answer.equals("zgadles")) {
                     System.out.println("WYGRALEM!");
+                    //System.out.println(i);
                     loopVar=true;
                     break;
 
