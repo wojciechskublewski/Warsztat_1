@@ -20,19 +20,18 @@ public class Main5 {
     }
 
     static void getTitle(){
-        Connection conect = Jsoup.connect("http://www.onet.pl");
+        Connection conect = Jsoup.connect("http://www.wp.pl");
         String str ="";
 
         try {
 
 
-            PrintWriter out = new PrintWriter("popular_worlds.txt");
+            FileWriter fileWriter1 = new FileWriter("popular_worlds.txt",false);
             Document document = conect.get();
-            Elements links = document.select("span.title");
+            Elements links = document.select("body");
             for (Element elem : links) {
 
                 str += elem.text() +" ";
-
             }
 
             str = str.replace("?","");
@@ -45,16 +44,17 @@ public class Main5 {
 
             String[] parts = str.split(" ");
 
-           // System.out.println(Arrays.toString(parts));
-
+           System.out.println(Arrays.toString(parts));
+            System.out.println(parts.length);
             for (int i=0; i<parts.length; i++) {
                 if (parts[i].length()>3) {
-                    out.println(parts[i]);
+                    fileWriter1.append(parts[i]+"\n");
+                    System.out.println(parts[i]);
 
 
                 }
             }
-
+            fileWriter1.close();
 
             String[] filtered = {"jest","który", "oraz","auto","odry"};
 
@@ -68,7 +68,7 @@ public class Main5 {
             }
             String strSup =reading.toString();
 
-            //System.out.println(strSup);
+            System.out.println(strSup);
 
             for (int i=0; i<filtered.length; i++) {
                 strSup=strSup.replace(filtered[i],"");
